@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.Stack;
 
-import djstra.Djstra;
+import dijkstra.Dijkstra;
 
 public class Gusano {
 	int aristas;
@@ -52,7 +52,7 @@ public class Gusano {
 	}
 
 	public void resolver() {
-		Djstra d = new Djstra(matriz);
+		Dijkstra d = new Dijkstra(matriz);
 		matrizCalculada = d.aplicar();
 		for (int i = 0; i < nodosInfectados; i++) {
 			AgregarSoluciones(infectados[i][0], infectados[i][1]);

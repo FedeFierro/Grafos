@@ -1,9 +1,9 @@
-package djstra;
+package dijkstra;
 
-public class Djstra {
+public class Dijkstra {
 	Double[][] matriz;
 	
-	public Djstra(int[][]origen) {
+	public Dijkstra(int[][]origen) {
 		matriz = new Double[origen.length][origen[0].length];
 		for(int i=0; i<matriz.length ;i++) {
 			for(int j=0; j< matriz[i].length; j++) {

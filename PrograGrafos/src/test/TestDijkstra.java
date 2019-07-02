@@ -42,5 +42,15 @@ public class TestDijkstra {
 		}
 		System.out.println(" ");
 	}
+	@Test
+	public void TestCamino() {
+		System.out.println("Test con Camino");
+		int[][] caminos = d.aplicarObtenerCaminos(0); 
+		for(int i =0; i<caminos[1].length; i++) {
+			System.out.print(caminos[1][i]+" ");
+		}
+		System.out.println(" ");
+		
+	}
 		
 }

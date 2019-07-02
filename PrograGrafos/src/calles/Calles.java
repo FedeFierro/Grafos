@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.Scanner;
 
 import dijkstra.Dijkstra;
+import entidades.NodoDijkstra;
 
 public class Calles {
 	int esquinas;
@@ -50,15 +51,15 @@ public class Calles {
 	public void resolver() {
 		/*mando la simetrica porque no me importa el sentido de las calles*/
 		Dijkstra d = new Dijkstra(simetrica);
-		int[][] caminos = d.aplicarObtenerCaminos(salida);
+		 NodoDijkstra[] caminos = d.aplicarNodo(salida);
 		ArrayList<Integer> caminoEscuela= new ArrayList<Integer>();
 		int nodo = escuela;
 		while(nodo!=salida) {
 			caminoEscuela.add(nodo);
-			nodo=caminos[1][nodo];
+			nodo= caminos[nodo].padre;
 		}
 		caminoEscuela.add(nodo);
-		int costo = caminos[0][escuela];
+		int costo = caminos[escuela].costo;
 		try {
 			PrintWriter pw = new PrintWriter(new FileWriter(this.fileName+".out"));
 			pw.println(costo);

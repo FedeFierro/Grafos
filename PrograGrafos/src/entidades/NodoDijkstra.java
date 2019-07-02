@@ -4,14 +4,17 @@ public class NodoDijkstra implements Comparable<NodoDijkstra>{
 	public int numero;
 	public int costo;
 	public boolean terminado;
-	public NodoDijkstra(int num, int costo) {
+	public int padre;
+	public NodoDijkstra(int num, int costo, int padre) {
 		this.numero=num;
 		this.costo=costo;
 		this.terminado=false;
+		this.padre=padre;
 	}
-	public NodoDijkstra(int num, int costo, boolean terminado) {
+	public NodoDijkstra(int num, int costo, int padre, boolean terminado) {
 		this.numero=num;
 		this.costo=costo;
+		this.padre=padre;
 		this.terminado=terminado;
 	}
 	@Override

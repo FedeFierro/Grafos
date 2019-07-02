@@ -2,6 +2,7 @@ package test;
 import org.junit.*;
 
 import dijkstra.*;
+import entidades.NodoDijkstra;
 
 public class TestDijkstra {
 	int[][]matriz= {{0,10,0,30,100},{0,0,50,0,0},{0,0,0,0,10},{0,0,20,0,60},{0,0,0,0,0}};
@@ -36,21 +37,16 @@ public class TestDijkstra {
 	@Test
 	public void testNodo() {
 		System.out.println("Test por Nodo");
-		int[] distancia = d.aplicarNodo(0); 
+		NodoDijkstra[] distancia = d.aplicarNodo(0); 
 		for(int i =0; i<distancia.length; i++) {
-			System.out.print(distancia[i]+" ");
+			System.out.print(distancia[i].costo+" ");
 		}
 		System.out.println(" ");
-	}
-	@Test
-	public void TestCamino() {
-		System.out.println("Test con Camino");
-		int[][] caminos = d.aplicarObtenerCaminos(0); 
-		for(int i =0; i<caminos[1].length; i++) {
-			System.out.print(caminos[1][i]+" ");
+		System.out.println("Caminos: ");
+		for(int i =0; i<distancia.length; i++) {
+			System.out.print(distancia[i].padre+" ");
 		}
 		System.out.println(" ");
-		
+
 	}
-		
 }

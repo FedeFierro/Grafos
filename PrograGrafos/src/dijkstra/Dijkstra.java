@@ -7,8 +7,7 @@ import entidades.NodoDijkstra;
 public class Dijkstra {
 	int[][] matriz;
 	final int MAX = Integer.MAX_VALUE / 3;
-	int [][] caminos;
-
+	
 	public Dijkstra(int[][] origen) {
 		matriz = new int[origen.length][origen[0].length];
 		for (int i = 0; i < matriz.length; i++) {
@@ -23,24 +22,26 @@ public class Dijkstra {
 
 	public int[][] aplicar() {
 		for (int i = 0; i < matriz.length; i++) {
-			matriz[i] = aplicarNodo(i);
+			NodoDijkstra[] nodos = aplicarNodo(i);
+			for(int j=0; j<nodos.length;j++) {
+				matriz[i][j]= nodos[j].costo;
+			}
 		}
+		
 		return matriz;
 	}
 
-	public int[] aplicarNodo(int nodo) {
+	public NodoDijkstra[] aplicarNodo(int nodo) {
 		NodoDijkstra[] distancias = new NodoDijkstra[matriz[nodo].length];
-		caminos = new int[2][matriz[nodo].length];
 		PriorityQueue<NodoDijkstra> cola = new PriorityQueue<NodoDijkstra>();
 		for (int i = 0; i < matriz[nodo].length; i++) {
 			NodoDijkstra n;
-			caminos[1][i]=nodo;
 			int costo = matriz[nodo][i];
 			if(i==nodo) {
-				n= new NodoDijkstra(i, 0, true);
+				n= new NodoDijkstra(i, 0,nodo, true);
 			}else {
 				
-				n = new NodoDijkstra(i, costo);
+				n = new NodoDijkstra(i, costo,nodo);
 				if(costo<MAX) {
 					cola.add(n);
 				}
@@ -58,7 +59,7 @@ public class Dijkstra {
 					int d1 = nw.costo + matriz[w][i];
 					if (d > d1) {
 						ni.costo = d1;
-						caminos[1][ni.numero]=nw.numero;
+						ni.padre=nw.numero;
 					if (!cola.contains(ni)) {
 							cola.add(ni);
 						}
@@ -66,17 +67,7 @@ public class Dijkstra {
 				}
 			}
 		}
-		int[] dis = new int[distancias.length];
-		for(int i=0; i< dis.length;i++) {
-			dis[i]=distancias[i].costo;
-			caminos[0][i]=distancias[i].costo;
-		}
-		return dis;
+		return distancias;
 	}
 	
-	public int[][] aplicarObtenerCaminos(int nodo) {
-		aplicarNodo(nodo);
-		return caminos;
-	}
-
 }

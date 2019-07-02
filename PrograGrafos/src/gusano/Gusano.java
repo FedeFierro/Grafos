@@ -53,7 +53,6 @@ public class Gusano {
 
 	public void resolver() {
 		Dijkstra d = new Dijkstra(matriz);
-		matrizCalculada = d.aplicar();
 		for (int i = 0; i < nodosInfectados; i++) {
 			AgregarSoluciones(infectados[i][0], infectados[i][1]);
 		}
@@ -74,12 +73,14 @@ public class Gusano {
 	}
 
 	public void AgregarSoluciones(int n, int t) {
-		for (int i = 0; i < matrizCalculada[n - 1].length; i++) {
-			Double valor = matrizCalculada[n - 1][i];
-			if (valor == t) {
+		Dijkstra d = new Dijkstra(matriz);
+		int[] dist = d.aplicarNodo(n-1);
+		for(int i=0; i<dist.length;i++) {
+			if(dist[i]==t) {
 				soluciones[i]++;
 			}
 		}
+		
 	}
 
 	private void crearMatriz(int nodos) {

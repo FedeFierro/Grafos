@@ -28,36 +28,45 @@ public class Dijkstra {
 	}
 
 	public int[] aplicarNodo(int nodo) {
-		int[] distancias = matriz[nodo];
-		boolean[] terminado = new boolean[distancias.length];
+		NodoDijkstra[] distancias = new NodoDijkstra[matriz[nodo].length];
 		PriorityQueue<NodoDijkstra> cola = new PriorityQueue<NodoDijkstra>();
-		terminado[nodo] = true;
-		for (int i = 0; i < distancias.length; i++) {
-			if (!terminado[i])
-				if (distancias[i] < MAX) {
-					cola.add(new NodoDijkstra(i, distancias[i]));
+		for (int i = 0; i < matriz[nodo].length; i++) {
+			NodoDijkstra n;
+			int costo = matriz[nodo][i];
+			if(i==nodo) {
+				n= new NodoDijkstra(i, 0, true);
+			}else {
+				
+				n = new NodoDijkstra(i, costo);
+				if(costo<MAX) {
+					cola.add(n);
 				}
+			}
+			distancias[i]=n;
 		}
 		while (!cola.isEmpty()) {
-			NodoDijkstra n = cola.poll();
-			int w = n.numero;
-			terminado[w] = true;
+			NodoDijkstra nw = cola.poll();
+			int w = nw.numero;
+			nw.terminado=true;
 			for (int i = 0; i < distancias.length; i++) {
-				if (!terminado[i]) {
-					int d = distancias[i];
-					int d1 = distancias[w] + matriz[w][i];
+				NodoDijkstra ni=distancias[i];
+				if(!ni.terminado) {
+					int d = ni.costo;
+					int d1 = nw.costo + matriz[w][i];
 					if (d > d1) {
-						distancias[i] = d1;
-						NodoDijkstra nvo = new NodoDijkstra(i, distancias[i]);
-
-						if (!cola.contains(nvo)) {
-							cola.add(nvo);
+						ni.costo = d1;
+					if (!cola.contains(ni)) {
+							cola.add(ni);
 						}
 					}
 				}
 			}
 		}
-		return distancias;
+		int[] dis = new int[distancias.length];
+		for(int i=0; i< dis.length;i++) {
+			dis[i]=distancias[i].costo;
+		}
+		return dis;
 	}
 
 }

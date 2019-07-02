@@ -3,12 +3,17 @@ package entidades;
 public class NodoDijkstra implements Comparable<NodoDijkstra>{
 	public int numero;
 	public int costo;
-	
+	public boolean terminado;
 	public NodoDijkstra(int num, int costo) {
 		this.numero=num;
 		this.costo=costo;
+		this.terminado=false;
 	}
-
+	public NodoDijkstra(int num, int costo, boolean terminado) {
+		this.numero=num;
+		this.costo=costo;
+		this.terminado=terminado;
+	}
 	@Override
 	public int compareTo(NodoDijkstra o) {
 		return (this.costo - o.costo);
